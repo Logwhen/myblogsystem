@@ -1,12 +1,13 @@
 package com.blog.myblogsystem.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.blog.myblogsystem.entity.User;
 import com.blog.myblogsystem.service.UserService;
 import com.blog.myblogsystem.service.userserviceImpl.UserServiceImpl;
-import com.fasterxml.jackson.databind.util.JSONPObject;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,7 +29,7 @@ public class UserController
        return users;
     }
     @RequestMapping ("/login")
-    public Object Login(HttpServletRequest req, HttpSession session) throws JSONException {
+    public String Login(HttpServletRequest req, HttpSession session) throws JSONException {
         JSONObject jsonObject = new JSONObject();
         String id=req.getParameter("ID");
         int ID=Integer.parseInt(id);
@@ -39,13 +40,12 @@ public class UserController
              jsonObject.put("code",1);
              jsonObject.put("msg","登录成功！");
              session.setAttribute("ID",ID);
-             return jsonObject;
+             return jsonObject.toString();
         }
         else{
             jsonObject.put("code",0);
             jsonObject.put("msg","用户名或密码错误");
-            return jsonObject;
+            return jsonObject.toString();
         }
-
     }
 }
