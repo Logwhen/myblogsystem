@@ -12,7 +12,8 @@ public class HelloController {
     @ResponseBody
     public String Hello()
     {
-        return "HelloWorld!";
+        return "Hello!";
     }
+
 
 }
