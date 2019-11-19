@@ -18,8 +18,8 @@ public class UserServiceImpl implements UserService {
         return Users;
     }
     @Override
-    public boolean VerifyUser(int ID, String password) {
-        boolean VerifyStatus=userMapper.VerifyUser(ID,password);
+    public boolean VerifyUser(String account, String password) {
+        boolean VerifyStatus=userMapper.VerifyUser(account,password);
         return VerifyStatus;
     }
 }

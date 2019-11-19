@@ -31,15 +31,14 @@ public class UserController
     @RequestMapping ("/login")
     public String Login(HttpServletRequest req, HttpSession session) throws JSONException {
         JSONObject jsonObject = new JSONObject();
-        String id=req.getParameter("ID");
-        int ID=Integer.parseInt(id);
+        String account=req.getParameter("account");
         String password=req.getParameter("password");
-        boolean response=userService.VerifyUser(ID,password);
+        boolean response=userService.VerifyUser(account,password);
         if(response)
         {
              jsonObject.put("code",1);
              jsonObject.put("msg","登录成功！");
-             session.setAttribute("ID",ID);
+             session.setAttribute("account",account);
              return jsonObject.toString();
         }
         else{
