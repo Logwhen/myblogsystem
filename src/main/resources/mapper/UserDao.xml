@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.blog.myblogsystem.dao.UserDao">
+    <select id="getUser" resultType="com.blog.myblogsystem.entity.User">
+        select * from MyBlogSystem.User
+        <where>
+            <if test="ID != null and ID != ''">ID like #{ID}</if>
+            <if test="username != null and username != ''">and username like #{username}</if>
+            <if test="password != null and password != ''">and password like #{password}</if>
+        </where>
+    </select>
+    <select id="getUsers" resultType="com.blog.myblogsystem.entity.User">
+        select * from MyBlogSystem.User
+        <where>
+            <if test="ID != null and ID != ''">ID like concat('%',#{ID},'%')</if>
+            <if test="username != null and username != ''">and username like concat('%',#{username},'%')</if>
+            <if test="password != null and password != ''">and password like concat('%',#{password},'%')</if>
+        </where>
+    </select>
+    <delete id="deleteUser">
+        delete from User
+        where ID=#{ID}
+    </delete>
+    <insert id="insertUser">
+        insert into User(ID,username,password) values(null,#{name},#{password})
+    </insert>
+    <update id="updateUser">
+       update User
+       <set>
+           <if test="username != null and username !=''">username=#{username}</if>
+           <if test="password != null and password !=''">password=#{password}</if>
+       </set>
+    </update>
+</mapper>
