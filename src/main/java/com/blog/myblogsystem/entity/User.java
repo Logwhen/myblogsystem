@@ -10,7 +10,7 @@ import lombok.ToString;
 @ToString
 @Data
 public class User {
-String name;
+String username;
 int ID;
 String password;
 }
