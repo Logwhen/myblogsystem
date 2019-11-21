@@ -35,7 +35,6 @@ public class LoginController {
             response.setError("请输入正确的密码！");
             return response;
         }
-        session.setMaxInactiveInterval(-1);
         session.setAttribute("id", UserList.get(0).getID());
         response.setStatus("200");
         response.setError(session.getId());

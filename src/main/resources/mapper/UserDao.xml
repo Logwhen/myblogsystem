@@ -24,11 +24,12 @@
     <insert id="insertUser">
         insert into User(ID,username,password) values(null,#{username},#{password})
     </insert>
-    <update id="updateUser">
+    <update id="UpdateUser">
        update User
        <set>
            <if test="username != null and username !=''">username=#{username}</if>
-           <if test="password != null and password !=''">and password=#{password}</if>
+        <if test="password != null and password !=''">password=#{password}</if>
        </set>
+       where ID=#{ID}
     </update>
 </mapper>
