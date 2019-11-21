@@ -22,7 +22,7 @@
         where ID=#{ID}
     </delete>
     <insert id="insertUser">
-        insert into User(ID,username,password) values(null,#{name},#{password})
+        insert into User(ID,username,password) values(null,#{username},#{password})
     </insert>
     <update id="updateUser">
        update User
