@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script src="jquery.js">
+
+</script>
+<script type="text/javascript">
+    $.ajax({
+        type: "POST",
+        url: "http://localhost:8080/login",
+        contentType:"application/json",
+        data: JSON.stringify({
+            username: "logwhen",
+            password: "19990511"
+        }),
+        dataType: "json",
+        xhrFields:{
+            withCredentials: true
+        },
+        crossDomain: true,
+        success: function (result, status, xhr) {
+            console.log(result);
+        },
+        error: function (message) {
+
+        }
+    });
+</script>
+</body>
+</html>

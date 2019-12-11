@@ -1,6 +1,4 @@
 package com.blog.myblogsystem.controller;
-
-import com.alibaba.fastjson.JSON;
 import com.blog.myblogsystem.dao.UserDao;
 import com.blog.myblogsystem.entity.Response;
 import com.blog.myblogsystem.entity.User;
