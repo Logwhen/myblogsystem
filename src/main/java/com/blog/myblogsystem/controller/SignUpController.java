@@ -1,8 +1,10 @@
 package com.blog.myblogsystem.controller;
 
 import com.blog.myblogsystem.dao.UserDao;
+import com.blog.myblogsystem.dao.UserInfoDao;
 import com.blog.myblogsystem.entity.Response;
 import com.blog.myblogsystem.entity.User;
+import com.blog.myblogsystem.entity.UserInfo;
 import com.blog.myblogsystem.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,6 +20,8 @@ public class SignUpController {
     private UserDao userDao;
     @Autowired
     private UserService userService;
+    @Autowired
+    private UserInfoDao userInfoDao;
     @RequestMapping(value = "/SignUp",method = RequestMethod.POST)
     public Response SignUp(@RequestBody User user)
     {
@@ -30,6 +34,10 @@ public class SignUpController {
         }
         try {
             userDao.insertUser(user);
+            UserInfo userInfo=new UserInfo();
+            userInfo.setID(user.getID());
+            userInfo.setUsername(user.getUsername());
+            userInfoDao.InsertUserInfo(userInfo);
 
         } catch (Exception e)
         {

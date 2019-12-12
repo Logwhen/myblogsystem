@@ -71,10 +71,7 @@ public class UserController
         System.out.println(user.getID());
         try{
             userDao.UpdateUser(user);
-            UserInfo userInfo=new UserInfo();
-            userInfo.setID(user.getID());
-            userInfo.setUsername(user.getUsername());
-            userInfoDao.InsertUserInfo(userInfo);
+
         } catch (Exception e) {
             e.printStackTrace();
             response.setError("500");
