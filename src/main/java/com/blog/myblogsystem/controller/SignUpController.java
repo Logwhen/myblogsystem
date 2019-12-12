@@ -30,6 +30,7 @@ public class SignUpController {
         }
         try {
             userDao.insertUser(user);
+
         } catch (Exception e)
         {
             e.printStackTrace();

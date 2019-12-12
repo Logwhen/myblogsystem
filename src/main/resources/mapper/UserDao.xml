@@ -10,7 +10,7 @@
         </where>
     </select>
     <select id="getUsers" resultType="com.blog.myblogsystem.entity.User">
-        select * from MyBlogSystem.User
+        select ID,username from MyBlogSystem.User
         <where>
             <if test="ID != null and ID != ''">ID like concat('%',#{ID},'%')</if>
             <if test="username != null and username != ''">and username like concat('%',#{username},'%')</if>

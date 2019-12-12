@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.blog.myblogsystem.dao.UserInfoDao">
+    <select id="GetUserInfo">
+        select * from UserInformation
+        <where>
+            <if test="ID != null and ID != ''">ID = #{ID}</if>
+            <if test="username != null and username != ''">and username = #{username}</if>
+        </where>
+    </select>
+    <update id="UpdateUserInfo">
+        update UserInformation
+        <set>
+          <if test="gender !=null and gender !=''">gender=#{gender},</if>
+            <if test="email !=null and email !=''">email=#{email},</if>
+            <if test="phone !=null and phone !=''">phone=#{phone},</if>
+            <if test="introduce !=null and introduce !=''">introduce=#{introduce},</if>
+            <if test="address !=null and address !=''">introduce=#{address}</if>
+        </set>
+        where ID=#{ID}
+    </update>
+</mapper>
