@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -51,17 +52,19 @@ public class UserInfoController {
        String id = session.getAttribute("id").toString();
        UserInfo userInfo1=new UserInfo();
        userInfo1.setID(Integer.parseInt(id));
+       System.out.println(userInfo1.getID());
        try {
            userInfo1 = userInfoDao.GetUserInfo(userInfo1);
            response.setStatus("200");
            response.setError("返回成功");
-           List<UserInfo> userInfos = null;
+           ArrayList<UserInfo> userInfos = new ArrayList<>();
            userInfos.add(userInfo1);
            response.setResult(userInfos);
            return response;
        }
        catch (Exception e)
        {
+           e.printStackTrace();
            response.setStatus("500");
            response.setError("系统错误");
            return response;
