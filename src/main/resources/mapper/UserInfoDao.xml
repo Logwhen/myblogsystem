@@ -15,8 +15,11 @@
             <if test="email !=null and email !=''">email=#{email},</if>
             <if test="phone !=null and phone !=''">phone=#{phone},</if>
             <if test="introduce !=null and introduce !=''">introduce=#{introduce},</if>
-            <if test="address !=null and address !=''">introduce=#{address}</if>
+            <if test="address !=null and address !=''">address=#{address}</if>
         </set>
         where ID=#{ID}
     </update>
+    <insert id="InsertUserInfo">
+        insert into UserInformation(ID,username) values (#{ID},#{username});
+    </insert>
 </mapper>

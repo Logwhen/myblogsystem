@@ -2,10 +2,8 @@ package com.blog.myblogsystem.controller;
 
 import com.blog.myblogsystem.dao.UserInfoDao;
 import com.blog.myblogsystem.entity.Response;
-import com.blog.myblogsystem.entity.User;
 import com.blog.myblogsystem.entity.UserInfo;
 import com.blog.myblogsystem.service.SessionService;
-import com.sun.org.apache.xml.internal.utils.StringToIntTable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;

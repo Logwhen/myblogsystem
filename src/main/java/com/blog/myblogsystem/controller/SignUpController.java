@@ -34,6 +34,7 @@ public class SignUpController {
         }
         try {
             userDao.insertUser(user);
+            user=userDao.getUser(user).get(0);
             UserInfo userInfo=new UserInfo();
             userInfo.setID(user.getID());
             userInfo.setUsername(user.getUsername());
