@@ -66,10 +66,10 @@ public class UserController
        }
         Response response=new Response();
        String id=session.getAttribute("id").toString();
-        System.out.println(session.getAttribute("id"));
-        user.setID(Integer.parseInt(id));
-        System.out.println(user.getID());
-        try{
+            System.out.println(session.getAttribute("id"));
+            user.setID(Integer.parseInt(id));
+            System.out.println(user.getID());
+            try{
             userDao.UpdateUser(user);
 
         } catch (Exception e) {
@@ -84,7 +84,4 @@ public class UserController
     }
 //    @RequestMapping(value = "/modify-personal-info",method = RequestMethod.PUT)
 //    public Response ModifyPersonalInfo(@RequestMapping)
-
-
-
 }

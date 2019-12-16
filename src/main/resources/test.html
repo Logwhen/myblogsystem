@@ -1,34 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>wangEditor demo</title>
 </head>
 <body>
-<script src="jquery.js">
 
+<div id="editor">
+    <p>欢迎使用 wangEditor 富文本编辑器</p>
+</div>
+<script data-main="./main.js" src="//unpkg.com/wangeditor/release/wangEditor.min.js"></script>
+    <script type="text/javascript">
+    var E = window.wangEditor
+    var editor = new E('#editor')
+    editor.create()
 </script>
-<script type="text/javascript">
-    $.ajax({
-        type: "POST",
-        url: "http://localhost:8080/login",
-        contentType:"application/json",
-        data: JSON.stringify({
-            username: "logwhen",
-            password: "19990511"
-        }),
-        dataType: "json",
-        xhrFields:{
-            withCredentials: true
-        },
-        crossDomain: true,
-        success: function (result, status, xhr) {
-            console.log(result);
-        },
-        error: function (message) {
 
-        }
-    });
-</script>
 </body>
 </html>
