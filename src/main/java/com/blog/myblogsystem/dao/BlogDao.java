@@ -14,5 +14,5 @@ public interface BlogDao {
     //获取当前用户所有博客接口
     List<Blog>getUserAllBlogs(Blog blog);
     //查询博客接口
-    List<Blog>searchBlog(Blog blog);
+    List<Blog>searchBlog(String searchString);
 }

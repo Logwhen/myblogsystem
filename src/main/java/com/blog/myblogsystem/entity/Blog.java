@@ -13,7 +13,7 @@ public class Blog {
     int userid;
     int blogid;
     String title;
-    String abstrac;
+    String Abstract;
     String content;
     String time;
 }
