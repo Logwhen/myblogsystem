@@ -18,4 +18,6 @@ public class UserInfo {
     String phone;
     String introduce;
     String address;
+    String background;
+    String profilephoto;
 }

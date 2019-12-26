@@ -16,6 +16,10 @@
             <if test="phone !=null and phone !=''">phone=#{phone},</if>
             <if test="introduce !=null and introduce !=''">introduce=#{introduce},</if>
             <if test="address !=null and address !=''">address=#{address}</if>
+            <if test="background!=null and background !=''">background=#{background}</if>
+            <if test="profilephoto !=null and profilephoto !=''">
+              profilephoto=#{profilephoto}
+            </if>
         </set>
         where ID=#{ID}
     </update>
