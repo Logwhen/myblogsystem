@@ -83,4 +83,39 @@ public class BlogController {
             return response;
         }
     }
+    //展示当前用户所有blog
+    @RequestMapping(path = "blog/getcur",method = RequestMethod.GET)
+    public Response CurBlog(HttpSession session)
+    {
+        if (sessionService.authority(session).getStatus() != "200") {
+            return sessionService.authority(session);
+        }
+        List<Blog> blogList;
+        Blog blog=new Blog();
+        Response response = new Response();
+        String id = session.getAttribute("id").toString();
+        blog.setUserid(Integer.parseInt(id));
+        try{
+            blogList=blogDao.getUserAllBlogs(blog);
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+            response.setError("服务器内部错误");
+            response.setStatus("500");
+            return  response;
+        }
+        if(blogList==null)
+        {
+            response.setStatus("404");
+            response.setError("未找到该博客");
+            return  response;
+        }
+        else
+        {
+            response.setError("查询成功");
+            response.setStatus("200");
+            response.setResult(blogList);
+            return response;
+        }
+    }
 }

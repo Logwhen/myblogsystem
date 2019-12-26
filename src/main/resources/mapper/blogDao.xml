@@ -8,7 +8,7 @@
             <if test="Abstract !=null and Abstract !=null">Abstract like concat('%',#{searchString},'%')</if>
         </where>
     </select>
-    <select id="getUserAllBlogs">
+    <select id="getUserAllBlogs" resultType="com.blog.myblogsystem.entity.Blog">
         select *from blog where userid=#{userid}
     </select>
     <insert id="writeBlog">
