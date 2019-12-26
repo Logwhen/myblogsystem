@@ -9,12 +9,10 @@ import com.blog.myblogsystem.service.UserService;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.server.Session;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.sql.PreparedStatement;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -117,5 +115,49 @@ public class BlogController {
             response.setResult(blogList);
             return response;
         }
+    }
+    @RequestMapping(path = "blog/delete",method = RequestMethod.DELETE)
+    public Response deleteBlog(@RequestBody Blog blog,HttpSession session)
+    {
+        if (sessionService.authority(session).getStatus() != "200") {
+            return sessionService.authority(session);
+        }
+
+
+        System.out.println(blog.getBlogid());
+        Response response = new Response();
+        try{
+            blogDao.deleteBlog(blog);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            response.setError("服务器内部错误");
+            response.setStatus("500");
+            return  response;
+        }
+            response.setError("删除成功");
+            response.setStatus("200");
+            return response;
+
+    }
+    @RequestMapping(path = "blog/view",method = RequestMethod.GET)
+    public Response viewBlogs(@RequestParam("userid") String userid)
+    {
+
+        Response response=new Response();
+        List<Blog> blogList=null;
+        try{
+            blogList=blogDao.viewotherBlogs(Integer.parseInt(userid));
+        } catch (Exception e) {
+            e.printStackTrace();
+            response.setStatus("500");
+            response.setError("服务器内部错误");
+            return response;
+        }
+        response.setStatus("200");
+        response.setStatus("访问成功");
+        response.setResult(blogList);
+        return response;
     }
 }

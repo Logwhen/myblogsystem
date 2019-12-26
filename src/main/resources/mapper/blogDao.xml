@@ -14,6 +14,10 @@
     <insert id="writeBlog">
         insert into blog(userid, title, Abstract, content, time) values (#{userid},#{title},#{Abstract},#{content},#{time})
     </insert>
+    <select id="viewotherBlogs" resultType="com.blog.myblogsystem.entity.Blog">
+        select * from blog
+        <where>userid=#{userid}</where>
+    </select>
     <delete id="deleteBlog">
     delete from blog where blogid=#{blogid}
     </delete>
