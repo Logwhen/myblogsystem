@@ -11,6 +11,6 @@ public class Comment {
     int blogid;
     int userid;
     int replyid;
-    String context;
+    String content;
     String time;
 }
