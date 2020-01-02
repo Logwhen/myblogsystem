@@ -144,7 +144,6 @@ public class BlogController {
     @RequestMapping(path = "blog/view",method = RequestMethod.GET)
     public Response viewBlogs(@RequestParam("userid") String userid)
     {
-
         Response response=new Response();
         List<Blog> blogList=null;
         try{

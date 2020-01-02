@@ -33,7 +33,6 @@ public class SignUpController {
            return response;
         }
         try {
-
             userDao.insertUser(user);
             user=userDao.getUser(user).get(0);
             UserInfo userInfo=new UserInfo();
