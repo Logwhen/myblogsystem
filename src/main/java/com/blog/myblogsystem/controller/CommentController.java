@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 @RestController
 public class CommentController {
@@ -38,6 +39,21 @@ public class CommentController {
         commentDao.insertComment(comment);
         response.setStatus("200");
         response.setError("评论成功");
+        return response;
+    }
+    @RequestMapping(path = "comment/get",method = RequestMethod.GET)
+            Response getComments(Comment comment,HttpSession session)
+    {
+        Response response=new Response();
+        if (sessionService.authority(session).getStatus()!="200")
+        {
+            return sessionService.authority(session);
+        }
+        List<Comment>CommentList=null;
+        CommentList=commentDao.getCommentList(comment);
+        response.setError("200");
+        response.setStatus("获取成功");
+        response.setResult(CommentList);
         return response;
     }
 }
