@@ -42,13 +42,14 @@ public class PictureController {
     }
     //获取当前用户的所有图片
     @RequestMapping(path = "picture/get",method = RequestMethod.GET)
-    Response getUserPictures(@RequestBody Picture picture,HttpSession session)
+    Response getUserPictures(HttpSession session)
     {
         Response response=new Response();
         if (sessionService.authority(session).getStatus()!="200")
         {
             return sessionService.authority(session);
         }
+        Picture picture=new Picture();
         String userid=session.getAttribute("id").toString();
         picture.setUserid(Integer.parseInt(userid));
         List<Picture> pictureList=null;
