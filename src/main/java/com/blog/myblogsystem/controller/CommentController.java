@@ -42,7 +42,7 @@ public class CommentController {
         return response;
     }
     @RequestMapping(path = "comment/get",method = RequestMethod.GET)
-            Response getComments(Comment comment,HttpSession session)
+            Response getComments(@RequestBody Comment comment,HttpSession session)
     {
         Response response=new Response();
         if (sessionService.authority(session).getStatus()!="200")
