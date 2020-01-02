@@ -11,7 +11,7 @@ import java.util.List;
 @Mapper
 @Repository
 public interface CommentDao {
-  @Insert("insert into comment values(#{userid},#{blogid},#{content},#{time},#{replyid})")
+  @Insert("insert into comment(userid,blogid,content,time,replyid) values(#{userid},#{blogid},#{content},#{time},#{replyid})")
   void insertComment(Comment comment);
  @Delete("delete from comment where commentid=#{commentid}")
  void deleteComment(Comment comment);
