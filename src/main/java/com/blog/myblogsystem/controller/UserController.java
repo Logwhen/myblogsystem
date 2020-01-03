@@ -28,10 +28,7 @@ public class UserController
         return sessionService.authority(session);
        }
         Response response=new Response();
-        String id=session.getAttribute("id").toString();
-        System.out.println(session.getAttribute("id"));
-        user.setID(Integer.parseInt(id));
-        System.out.println(user.getID());
+        
         try{
             List<User> userList;
             userList=userDao.getUsers(user);

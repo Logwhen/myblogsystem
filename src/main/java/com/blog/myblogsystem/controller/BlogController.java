@@ -165,5 +165,9 @@ public class BlogController {
         blog.setViewtimes(blog.getViewtimes()+1);
         return String.valueOf(blog.getViewtimes());
     }
-
+    @RequestMapping(path = "blog/getviewtimes",method = RequestMethod.POST)
+    String getViewTimes(@RequestBody Blog blog)
+    {
+        return String.valueOf(blog.getViewtimes());
+    }
 }
