@@ -14,4 +14,5 @@ public class Comment {
     int replyid;
     String content;
     String time;
+    String username;
 }

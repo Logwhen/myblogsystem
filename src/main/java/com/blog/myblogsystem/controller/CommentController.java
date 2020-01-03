@@ -1,8 +1,10 @@
 package com.blog.myblogsystem.controller;
 
 import com.blog.myblogsystem.dao.CommentDao;
+import com.blog.myblogsystem.dao.UserDao;
 import com.blog.myblogsystem.entity.Comment;
 import com.blog.myblogsystem.entity.Response;
+import com.blog.myblogsystem.entity.User;
 import com.blog.myblogsystem.service.SessionService;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
@@ -20,6 +22,8 @@ public class CommentController {
     @Autowired
     CommentDao commentDao;
     @Autowired
+    UserDao userDao;
+    @Autowired
    SessionService sessionService;
     @RequestMapping(value = "comment/add",method = RequestMethod.POST)
     Response addComment(@RequestBody Comment comment, HttpSession session)
@@ -31,6 +35,10 @@ public class CommentController {
         }
         String userid=session.getAttribute("id").toString();
         comment.setUserid(Integer.parseInt(userid));
+        User user=new User();
+        user.setID(Integer.parseInt(userid));
+        user=userDao.getUser(user).get(0);
+        comment.setUsername(user.getUsername());
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         SimpleDateFormat df1=new SimpleDateFormat("HH:mm:ss");
         String curTime=df.format(new Date())+" "+df1.format(new Date());

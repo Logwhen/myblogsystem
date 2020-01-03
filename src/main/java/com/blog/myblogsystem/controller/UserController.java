@@ -28,7 +28,7 @@ public class UserController
         return sessionService.authority(session);
        }
         Response response=new Response();
-        
+
         try{
             List<User> userList;
             userList=userDao.getUsers(user);
