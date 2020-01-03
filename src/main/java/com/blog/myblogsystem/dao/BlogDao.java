@@ -17,4 +17,5 @@ public interface BlogDao {
     List<Blog>searchBlog(String searchString);
     //查看他人所有博客
     List<Blog>viewotherBlogs(int userid);
+
 }

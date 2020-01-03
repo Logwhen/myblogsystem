@@ -16,4 +16,6 @@ public class Blog {
     String Abstract;
     String content;
     String time;
+    int viewtimes;
+    int likes;
 }

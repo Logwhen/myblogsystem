@@ -159,4 +159,11 @@ public class BlogController {
         response.setResult(blogList);
         return response;
     }
+    @RequestMapping(path = "blog/viewtimes",method = RequestMethod.POST)
+    String viewTimes(@RequestBody Blog blog)
+    {
+        blog.setViewtimes(blog.getViewtimes()+1);
+        return String.valueOf(blog.getViewtimes());
+    }
+
 }

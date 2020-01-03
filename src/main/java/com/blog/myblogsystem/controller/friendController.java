@@ -32,4 +32,18 @@ public class friendController {
         friendDao.subscribe(friendList);
         return response;
     }
+    @RequestMapping(path="friend/delete",method = RequestMethod.DELETE)
+    Response Delete(@RequestBody FriendList friendList,HttpSession session)
+    {
+        if (sessionService.authority(session).getStatus()!="200")
+        {
+            return sessionService.authority(session);
+        }
+        Response response=new Response();
+        String userid=session.getAttribute("id").toString();
+        friendList.setUserid(Integer.parseInt(userid));
+        friendDao.subscribe(friendList);
+        return response;
+    }
+
 }
