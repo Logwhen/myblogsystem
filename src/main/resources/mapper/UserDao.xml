@@ -4,9 +4,9 @@
     <select id="getUser" resultType="com.blog.myblogsystem.entity.User">
         select * from MyBlogSystem.User
         <where>
-            <if test="ID != null and ID != ''">ID like #{ID}</if>
-            <if test="username != null and username != ''">and username like #{username}</if>
-            <if test="password != null and password != ''">and password like #{password}</if>
+            <if test="ID != null and ID != ''">ID = #{ID}</if>
+            <if test="username != null and username != ''">and username = #{username}</if>
+            <if test="password != null and password != ''">and password = #{password}</if>
         </where>
     </select>
     <select id="getUsers" resultType="com.blog.myblogsystem.entity.User">

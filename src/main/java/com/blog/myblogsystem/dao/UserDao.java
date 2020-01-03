@@ -15,4 +15,7 @@ public interface UserDao {
     void UpdateUser(User user);
     void insertUser(User user);
     List<User> getUser(User user);
+
+    @Select("select from user where ID=#{ID}")
+    List<User> getUsername(User user);
 }
