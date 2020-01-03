@@ -31,7 +31,7 @@ public class UserController
 
         try{
             List<User> userList;
-            userList=userDao.getUsers(user);
+            userList=userDao.getUser(user);
             if(userList.size()==0)
             {
                 response.setStatus("404");
