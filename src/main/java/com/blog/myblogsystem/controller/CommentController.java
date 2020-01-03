@@ -41,10 +41,9 @@ public class CommentController {
         return response;
     }
     @RequestMapping(path = "comment/get",method = RequestMethod.POST)
-    Response getComments(@RequestParam("blogid") String blogid, HttpSession session)
+    Response getComments(@RequestBody Comment comment, HttpSession session)
     {
-        Comment comment=new Comment();
-        comment.setBlogid(Integer.parseInt(blogid));
+
         Response response=new Response();
         if (sessionService.authority(session).getStatus()!="200")
         {
