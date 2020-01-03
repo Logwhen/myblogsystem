@@ -5,7 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Getter
-@Setter@Data
+@Setter
+@Data
 public class Comment {
     int commentid;
     int blogid;

@@ -5,11 +5,10 @@ import com.blog.myblogsystem.entity.Comment;
 import com.blog.myblogsystem.entity.Response;
 import com.blog.myblogsystem.service.SessionService;
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Param;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
@@ -41,9 +40,10 @@ public class CommentController {
         response.setError("评论成功");
         return response;
     }
-    @RequestMapping(path = "comment/get",method = RequestMethod.GET)
-            Response getComments(@RequestBody Comment comment,HttpSession session)
+    @RequestMapping(path = "comment/get",method = RequestMethod.POST)
+    Response getComments(@RequestBody Comment comment, HttpSession session)
     {
+
         Response response=new Response();
         if (sessionService.authority(session).getStatus()!="200")
         {
