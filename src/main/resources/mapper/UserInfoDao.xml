@@ -11,7 +11,7 @@
     <update id="UpdateUserInfo">
         update UserInformation
         <set>
-        <if test="username!=null and username !=''">username=#{username}</if>
+        <if test="username!=null and username !=''">username=#{username},</if>
           <if test="gender !=null and gender !=''">gender=#{gender},</if>
             <if test="email !=null and email !=''">email=#{email},</if>
             <if test="phone !=null and phone !=''">phone=#{phone},</if>
