@@ -161,13 +161,13 @@ public class BlogController {
             return response;
 
     }
-    @RequestMapping(path = "blog/view",method = RequestMethod.GET)
-    public Response viewBlogs(@RequestParam("userid") String userid)
+    @RequestMapping(path = "blog/view",method = RequestMethod.POST)
+    public Response viewBlogs(@RequestBody Blog blog)
     {
         Response response=new Response();
         List<Blog> blogList=null;
         try{
-            blogList=blogDao.viewotherBlogs(Integer.parseInt(userid));
+            blogList=blogDao.getUserBlogs(blog);
         } catch (Exception e) {
             e.printStackTrace();
             response.setStatus("500");

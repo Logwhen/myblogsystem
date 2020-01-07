@@ -16,6 +16,6 @@ public interface UserDao {
     void insertUser(User user);
     List<User> getUser(User user);
 
-    @Select("select from user where ID=#{ID}")
-    List<User> getUsername(User user);
+    @Select("select from user where ID=#{ID} and password=#{password}")
+    List<User> passwordCheck(User user);
 }
