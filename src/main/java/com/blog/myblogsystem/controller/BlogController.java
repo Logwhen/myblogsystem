@@ -204,12 +204,22 @@ public class BlogController {
         return  response;
     }
     @RequestMapping(path = "blog/cancelLikes",method = RequestMethod.POST)
-    String CancelLikes(@RequestBody Blog blog)
-    {   int likes=0;
-        likes=blog.getLikes()-1;
-        if(likes<=0) likes=0;
-        blog.setLikes(likes);
-        return String.valueOf(blog.getLikes());
+    Response CancelLikes(@RequestBody Blog blog,HttpSession session)
+    {
+        if (sessionService.authority(session).getStatus() != "200") {
+            return sessionService.authority(session);
+        }
+        Response response = new Response();
+        String id = session.getAttribute("id").toString();
+        blog.setUserid(Integer.parseInt(id));
+        blog=blogDao.getBlog(blog.getBlogid()).get(0);
+        blog.setStatus(0);
+        blog.setLikes(blog.getLikes()-1);
+        blogDao.updateBlog(blog);
+        blogDao.cancelLikes(blog);
+        response.setStatus("200");
+        response.setError("点赞成功");
+        return  response;
     }
     @RequestMapping(path = "blog/getviewtimes",method = RequestMethod.POST)
     String getViewTimes(@RequestBody Blog blog)

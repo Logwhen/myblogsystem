@@ -1,6 +1,7 @@
 package com.blog.myblogsystem.dao;
 
 import com.blog.myblogsystem.entity.Blog;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -26,4 +27,6 @@ public interface BlogDao {
     void addLikes(Blog blog);
     @Select("select * from Likes where userid=#{userid} and blogid=#{blogid}")
     List<Blog> CheckLikes(Blog blog);
+    @Delete("delete from likes where userid=#{userid} and blogid=#{blogid}")
+    void cancelLikes(Blog blog);
 }
