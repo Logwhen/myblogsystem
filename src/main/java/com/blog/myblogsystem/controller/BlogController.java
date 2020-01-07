@@ -211,9 +211,8 @@ public class BlogController {
         Response response = new Response();
         String id = session.getAttribute("id").toString();
         blog.setUserid(Integer.parseInt(id));
-        blog=blogDao.getBlog(blog.getBlogid()).get(0);
         blog.setStatus(0);
-        blog.setLikes(blog.getLikes()-1);
+        blog.setLikes(blogDao.getBlog(blog.getBlogid()).get(0).getLikes()-1);
         blogDao.updateBlog(blog);
         blogDao.cancelLikes(blog);
         response.setStatus("200");
