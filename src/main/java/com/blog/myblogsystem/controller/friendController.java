@@ -59,7 +59,7 @@ public class friendController {
         int s = random.nextInt(max) % (max - min + 1) + min;
         return s;
     }
-    @RequestMapping(path = "friend/recommend",method = RequestMethod.POST)
+    @RequestMapping(path = "friend/recommend",method = RequestMethod.GET)
     Response Recommend(HttpSession session)
     {
         Response response=new Response();
@@ -68,7 +68,12 @@ public class friendController {
         response.setResult(userInfoList);
         response.setError("获取成功");
         response.setStatus("200");
-       return response;
+        return response;
     }
-
+   @RequestMapping(path="friend/getList",method = RequestMethod.GET)
+    Response GetFriendList(HttpSession session)
+   {
+       Response response=new Response();
+       return response;
+   }
 }

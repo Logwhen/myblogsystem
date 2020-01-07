@@ -12,7 +12,7 @@ import java.util.List;
 @Mapper
 @Repository
 public interface FriendDao {
-    @Select("select * from UserInformation order by ran() limit 5")
+    @Select("select * from UserInformation order by rand() limit 5")
     List<UserInfo> GetRandomUser();
     @Insert("insert into friendlist values(#{userid},#{friendid})")
     void subscribe(FriendList friendList);
