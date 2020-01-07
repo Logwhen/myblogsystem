@@ -121,6 +121,7 @@ public class BlogController {
                 {
                     blogList.get(i).setStatus(1);
                 }
+                else  blogList.get(i).setStatus(0);
             }
             response.setError("查询成功");
             response.setStatus("200");
