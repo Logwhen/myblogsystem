@@ -77,6 +77,7 @@ public class FavouratesController {
         response.setStatus("200");
         response.setError("获取成功");
         response.setResult(favouratesList);
+        response.setResult(blogList);
         return response;
     }
 
