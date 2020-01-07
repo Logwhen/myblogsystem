@@ -42,7 +42,7 @@ public class FavouratesController {
         return response;
     }
     @RequestMapping(path = "favourates/delete",method = RequestMethod.DELETE)
-    Response deleteFavourates(Favourates favourates,HttpSession session)
+    Response deleteFavourates(@RequestBody Favourates favourates,HttpSession session)
     {
         if (sessionService.authority(session).getStatus()!="200")
         {
@@ -51,7 +51,14 @@ public class FavouratesController {
         Response response=new Response();
         String userid=session.getAttribute("id").toString();
         favourates.setUserid(userid);
-        favouratesDao.deleteFavourates(favourates);
+        System.out.println(favourates.getBlogid());
+        System.out.println(favourates.getUserid());
+        try {
+            favouratesDao.deleteFavourates(favourates);
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
         response.setStatus("200");
         response.setError("移除成功");
         return  response;
