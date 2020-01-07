@@ -68,6 +68,8 @@ public class PictureController {
             return sessionService.authority(session);
         }
         pictureDao.deletPicture(picture);
+        response.setStatus("200");
+        response.setError("删除成功");
         return response;
     }
 }
