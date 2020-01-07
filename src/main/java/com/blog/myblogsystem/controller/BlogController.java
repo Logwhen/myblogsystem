@@ -1,11 +1,9 @@
 package com.blog.myblogsystem.controller;
 
 import com.blog.myblogsystem.dao.BlogDao;
+import com.blog.myblogsystem.dao.CommentDao;
 import com.blog.myblogsystem.dao.FavouratesDao;
-import com.blog.myblogsystem.entity.Blog;
-import com.blog.myblogsystem.entity.Favourates;
-import com.blog.myblogsystem.entity.Response;
-import com.blog.myblogsystem.entity.User;
+import com.blog.myblogsystem.entity.*;
 import com.blog.myblogsystem.service.SessionService;
 import com.blog.myblogsystem.service.UserService;
 import org.apache.ibatis.annotations.Param;
@@ -21,6 +19,8 @@ import java.util.List;
 
 @RestController
 public class BlogController {
+    @Autowired
+    CommentDao commentDao;
     @Autowired
     FavouratesDao favouratesDao;
     @Autowired
@@ -133,7 +133,9 @@ public class BlogController {
         try{
             Favourates favourates=new Favourates();
             favourates.setBlogid(String.valueOf(blog.getBlogid()));
-
+            Comment comment=new Comment();
+            comment.setBlogid(blog.getBlogid());
+            commentDao.deleteComment(comment);
             favouratesDao.deleteFromFavourates(favourates);
             blogDao.deleteBlog(blog);
         }

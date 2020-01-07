@@ -15,6 +15,8 @@ public interface CommentDao {
   void insertComment(Comment comment);
  @Delete("delete from comment where commentid=#{commentid}")
  void deleteComment(Comment comment);
+ @Delete("delete from comment where blogid=#{blogid}")
+ void deleteCommentByBlogid(Comment comment);
  @Select("select *from comment where blogid=#{blogid} order by commentid")
   List<Comment> getCommentList(Comment comment);
 }

@@ -48,6 +48,19 @@ public class CommentController {
         response.setError("评论成功");
         return response;
     }
+    @RequestMapping(path="comment/delete",method = RequestMethod.DELETE)
+    Response deleteComment(@RequestBody Comment comment,HttpSession session)
+    {
+        Response response=new Response();
+        if (sessionService.authority(session).getStatus()!="200")
+        {
+            return sessionService.authority(session);
+        }
+        commentDao.deleteComment(comment);
+        response.setError("删除成功");
+        response.setStatus("200");
+        return  response;
+    }
     @RequestMapping(path = "comment/get",method = RequestMethod.POST)
     Response getComments(@RequestBody Comment comment, HttpSession session)
     {
