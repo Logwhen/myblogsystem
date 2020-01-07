@@ -5,6 +5,7 @@ import com.blog.myblogsystem.dao.CommentDao;
 import com.blog.myblogsystem.dao.FavouratesDao;
 import com.blog.myblogsystem.entity.*;
 import com.blog.myblogsystem.service.SessionService;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -192,6 +193,7 @@ public class BlogController {
         }
         Response response = new Response();
         String id = session.getAttribute("id").toString();
+        blog.setUserid(Integer.parseInt(id));
         blog.setLikes(blog.getLikes()+1);
         blogDao.addLikes(blog);
         response.setStatus("200");
