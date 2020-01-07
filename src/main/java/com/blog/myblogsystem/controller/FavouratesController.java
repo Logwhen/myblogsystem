@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpSession;
 import javax.xml.xpath.XPath;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -68,14 +69,15 @@ public class FavouratesController {
         String userid=session.getAttribute("id").toString();
         favourates.setUserid(userid);
         List<Favourates>favouratesList=favouratesDao.getFavouratesList(favourates);
-        List<Blog> blogList = null;
+        List<Blog> blogList = new ArrayList<Blog>();
         for(int i=0;i<favouratesList.size();i++) {
             Blog blog=new Blog();
             blog.setBlogid(Integer.parseInt(favouratesList.get(i).getBlogid()));
             System.out.println(blog.getBlogid());
             if(blogDao.getBlog(blog.getBlogid())!= null&&blogDao.getBlog(blog.getBlogid()).size()!=0) {
                 blog=blogDao.getBlog(blog.getBlogid()).get(0);
-                blogList.add(blog);
+                System.out.println(blog);
+               blogList.add(blog);
             }
         }
         response.setStatus("200");
