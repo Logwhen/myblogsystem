@@ -3,6 +3,7 @@ package com.blog.myblogsystem.controller;
 import com.blog.myblogsystem.dao.PictureDao;
 import com.blog.myblogsystem.entity.Picture;
 import com.blog.myblogsystem.entity.Response;
+import com.blog.myblogsystem.entity.User;
 import com.blog.myblogsystem.service.SessionService;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -72,4 +73,18 @@ public class PictureController {
         response.setError("删除成功");
         return response;
     }
+    @RequestMapping(path = "picture/view",method = RequestMethod.GET)
+    Response getUserPictures(@RequestBody User user)
+    {
+        Response response=new Response();
+        List<Picture> pictureList=null;
+        Picture picture=new Picture();
+        picture.setUserid(user.getID());
+        pictureList=pictureDao.getuserPictures(picture);
+        response.setStatus("200");
+        response.setError("获取成功");
+        response.setResult(pictureList);
+        return  response;
+    }
+
 }
