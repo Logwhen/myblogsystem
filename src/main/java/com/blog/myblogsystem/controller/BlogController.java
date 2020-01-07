@@ -3,6 +3,7 @@ package com.blog.myblogsystem.controller;
 import com.blog.myblogsystem.dao.BlogDao;
 import com.blog.myblogsystem.dao.CommentDao;
 import com.blog.myblogsystem.dao.FavouratesDao;
+import com.blog.myblogsystem.dao.UserInfoDao;
 import com.blog.myblogsystem.entity.*;
 import com.blog.myblogsystem.service.SessionService;
 import org.apache.ibatis.annotations.Insert;
@@ -12,11 +13,14 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 @RestController
 public class BlogController {
+    @Autowired
+    UserInfoDao userInfoDao;
     @Autowired
     CommentDao commentDao;
     @Autowired
@@ -177,6 +181,26 @@ public class BlogController {
         response.setStatus("200");
         response.setStatus("访问成功");
         response.setResult(blogList);
+        return response;
+    }
+    @RequestMapping(path = "blog/share",method = RequestMethod.GET)
+    public Response getAllBlogs()
+    {
+        Response response=new Response();
+        List<Blog> blogList=blogDao.getAllBlogs();
+        List<UserInfo> UserInfoList=new ArrayList<>();
+        for(int i=0;i<blogList.size();i++)
+        {
+            int id=blogList.get(i).getUserid();
+            UserInfo userInfo=new UserInfo();
+            userInfo.setID(id);
+            userInfo=userInfoDao.GetUserInfo(userInfo);
+            UserInfoList.add(userInfo);
+        }
+        response.setStatus("200");
+        response.setStatus("访问成功");
+        response.setResult(blogList);
+        response.setResult(UserInfoList);
         return response;
     }
     @RequestMapping(path = "blog/viewtimes",method = RequestMethod.POST)

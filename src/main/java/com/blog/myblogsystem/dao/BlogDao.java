@@ -14,6 +14,8 @@ import java.util.List;
 public interface BlogDao {
     void writeBlog(Blog blog);
     void deleteBlog(Blog blog);
+    @Select("select * from blog order by blogid DESC")
+    List<Blog> getAllBlogs();
     @Update("update blog set likes=#{likes},status=#{status} where blogid=#{blogid}")
     void updateBlog(Blog blog);
     List<Blog> getBlog(int blogid);
