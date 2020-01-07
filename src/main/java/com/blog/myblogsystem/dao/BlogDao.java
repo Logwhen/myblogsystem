@@ -29,6 +29,6 @@ public interface BlogDao {
     void addLikes(Blog blog);
     @Select("select * from Likes where userid=#{userid} and blogid=#{blogid}")
     List<Blog> CheckLikes(Blog blog);
-    @Delete("delete from likes where userid=#{userid} and blogid=#{blogid}")
+    @Delete("delete from Likes where userid=#{userid} and blogid=#{blogid}")
     void cancelLikes(Blog blog);
 }
