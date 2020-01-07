@@ -1,9 +1,11 @@
 package com.blog.myblogsystem.controller;
 
 import com.blog.myblogsystem.dao.PictureDao;
+import com.blog.myblogsystem.dao.UserInfoDao;
 import com.blog.myblogsystem.entity.Picture;
 import com.blog.myblogsystem.entity.Response;
 import com.blog.myblogsystem.entity.User;
+import com.blog.myblogsystem.entity.UserInfo;
 import com.blog.myblogsystem.service.SessionService;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +28,8 @@ public class PictureController {
     SessionService sessionService;
     @Autowired
     PictureDao pictureDao;
+    @Autowired
+    UserInfoDao userInfoDao;
     @RequestMapping(path = "picture/insert",method = RequestMethod.POST)
     Response insertPictures(@RequestBody String body, HttpSession session) throws IOException, ServletException {
         Response response=new Response();
@@ -40,6 +44,18 @@ public class PictureController {
         pictureDao.insertPicture(picture);
         System.out.println(body);
         return response;
+    }
+    @RequestMapping(path = "avatar/get",method = RequestMethod.GET)
+    Response getUserAvatar(@RequestBody UserInfo userInfo)
+    {
+        Response response=new Response();
+        List<UserInfo> UserInfoList;
+        UserInfoList=userInfoDao.SelectByUserId(userInfo);
+        response.setStatus("200");
+        response.setError("查询成功");
+        response.setResult(UserInfoList);
+        return  response;
+
     }
     //获取当前用户的所有图片
     @RequestMapping(path = "picture/get",method = RequestMethod.GET)

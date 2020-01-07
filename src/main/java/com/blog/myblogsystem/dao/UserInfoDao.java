@@ -13,4 +13,5 @@ public interface UserInfoDao {
    UserInfo GetUserInfo(UserInfo userInfo);
    void InsertUserInfo(UserInfo userInfo);
    void DeleteUserInfo(UserInfo userInfo);
+   List<UserInfo> SelectByUserId(UserInfo userInfo);
 }
