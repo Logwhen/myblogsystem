@@ -13,9 +13,9 @@ import java.util.List;
 public interface FavouratesDao {
     @Insert("insert into favourates(userid,blogid) values(#{userid},#{blogid})")
     void addfavourates(Favourates favourates);
-    @Delete("delete from favourates where userid=#{userid} and blogid=#{blogid}")
+    @Delete("delete  from favourates where userid=#{userid} and blogid=#{blogid}")
     void deleteFavourates(Favourates favourates);
-    @Delete("delete * from favourates where blogid=#{blogid}")
+    @Delete("delete  from favourates where blogid=#{blogid}")
     void deleteFromFavourates(Favourates favourates);
     @Select("select * from favourates where userid=#{userid}")
     List<Favourates> getFavouratesList(Favourates favourates);

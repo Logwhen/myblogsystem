@@ -133,6 +133,7 @@ public class BlogController {
         try{
             Favourates favourates=new Favourates();
             favourates.setBlogid(String.valueOf(blog.getBlogid()));
+
             favouratesDao.deleteFromFavourates(favourates);
             blogDao.deleteBlog(blog);
         }
