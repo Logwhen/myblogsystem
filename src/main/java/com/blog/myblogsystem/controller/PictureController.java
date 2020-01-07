@@ -67,6 +67,7 @@ public class PictureController {
         {
             return sessionService.authority(session);
         }
+        pictureDao.deletPicture(picture);
         return response;
     }
 }
