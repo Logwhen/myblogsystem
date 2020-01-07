@@ -42,7 +42,7 @@ public class friendController {
         Response response=new Response();
         String userid=session.getAttribute("id").toString();
         friendList.setUserid(Integer.parseInt(userid));
-        friendDao.subscribe(friendList);
+        friendDao.cancelsubscribe(friendList);
         return response;
     }
 

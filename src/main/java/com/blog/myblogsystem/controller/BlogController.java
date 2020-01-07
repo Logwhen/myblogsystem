@@ -183,6 +183,7 @@ public class BlogController {
     String viewTimes(@RequestBody Blog blog)
     {
         blog.setViewtimes(blog.getViewtimes()+1);
+        blogDao.updateBlog(blog);
         return String.valueOf(blog.getViewtimes());
     }
     @RequestMapping(path = "blog/likes",method = RequestMethod.POST)
