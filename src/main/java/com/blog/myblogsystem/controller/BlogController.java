@@ -197,6 +197,7 @@ public class BlogController {
         blog=blogDao.getBlog(blog.getBlogid()).get(0);
         blog.setStatus(1);
         blog.setLikes(blog.getLikes()+1);
+        blogDao.updateBlog(blog);
         blogDao.addLikes(blog);
         response.setStatus("200");
         response.setError("点赞成功");
