@@ -73,7 +73,23 @@ public class friendController {
    @RequestMapping(path="friend/getList",method = RequestMethod.GET)
     Response GetFriendList(HttpSession session)
    {
+       int id=Integer.parseInt(session.getAttribute("id").toString());
        Response response=new Response();
+       List<FriendList> friendLists=friendDao.getSubscribeList(id);
+       List<UserInfo> UserInfoList=new ArrayList<>();
+       if(friendLists!=null&&friendLists.size()!=0)
+       {
+           for(int i=0;i<friendLists.size();i++)
+           {
+               UserInfo userInfo=new UserInfo();
+               userInfo.setID(friendLists.get(i).getFriendid());
+               userInfo=userInfoDao.GetUserInfo(userInfo);
+               UserInfoList.add(userInfo);
+           }
+       }
+       response.setError("获取成功");
+       response.setStatus("200");
+       response.setResult(UserInfoList);
        return response;
    }
 }

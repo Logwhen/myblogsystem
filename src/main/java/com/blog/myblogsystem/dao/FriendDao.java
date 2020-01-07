@@ -14,10 +14,10 @@ import java.util.List;
 public interface FriendDao {
     @Select("select * from UserInformation order by rand() limit 5")
     List<UserInfo> GetRandomUser();
-    @Insert("insert into friendlist values(#{userid},#{friendid})")
+    @Insert("insert into friendlist(userid,friendid) values(#{userid},#{friendid})")
     void subscribe(FriendList friendList);
     @Delete("delete from friendlist where friendid=#{friendid}")
     void cancelsubscribe(FriendList friendList);
-    @Select("select * from friendlist where userid=#{friendid} ")
+    @Select("select * from friendlist where userid=#{userid} ")
     List<FriendList> getSubscribeList(int userid);
 }
