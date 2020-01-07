@@ -68,11 +68,15 @@ public class FavouratesController {
         String userid=session.getAttribute("id").toString();
         favourates.setUserid(userid);
         List<Favourates>favouratesList=favouratesDao.getFavouratesList(favourates);
-        List<Blog> blogList=null;
+        List<Blog> blogList = null;
         for(int i=0;i<favouratesList.size();i++) {
             Blog blog=new Blog();
             blog.setBlogid(Integer.parseInt(favouratesList.get(i).getBlogid()));
-            blogList.add(blogDao.getBlogByBlogid(blog));
+            System.out.println(blog.getBlogid());
+            if(blogDao.getBlog(blog.getBlogid())!= null&&blogDao.getBlog(blog.getBlogid()).size()!=0) {
+                blog=blogDao.getBlog(blog.getBlogid()).get(0);
+                blogList.add(blog);
+            }
         }
         response.setStatus("200");
         response.setError("获取成功");

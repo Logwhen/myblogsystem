@@ -11,6 +11,9 @@
     <select id="getUserAllBlogs" resultType="com.blog.myblogsystem.entity.Blog">
         select *from blog where userid=#{userid}
     </select>
+    <select id="getBlog" resultType="com.blog.myblogsystem.entity.Blog">
+        select  *from blog where blogid=#{blogid}
+    </select>
     <insert id="writeBlog">
         insert into blog(userid, title, Abstract, content, time) values (#{userid},#{title},#{Abstract},#{content},#{time})
     </insert>
