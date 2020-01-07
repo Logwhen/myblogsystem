@@ -31,4 +31,7 @@ public interface BlogDao {
     List<Blog> CheckLikes(Blog blog);
     @Delete("delete from likes where userid=#{userid} and blogid=#{blogid}")
     void cancelLikes(Blog blog);
+    //获取指定id对应的博客
+    @Select("select *from blog where userid=#{userid}")
+    List<Blog> getUserBlogs(Blog blog);
 }
