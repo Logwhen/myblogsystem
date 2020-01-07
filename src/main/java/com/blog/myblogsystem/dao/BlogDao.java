@@ -29,7 +29,7 @@ public interface BlogDao {
     void addLikes(Blog blog);
     @Select("select * from Likes where userid=#{userid} and blogid=#{blogid}")
     List<Blog> CheckLikes(Blog blog);
-    @Delete("delete from likes where userid=#{userid} and blogid=#{blogid}")
+    @Delete("delete from Likes where userid=#{userid} and blogid=#{blogid}")
     void cancelLikes(Blog blog);
     //获取指定id对应的博客
     @Select("select *from blog where userid=#{userid}")
