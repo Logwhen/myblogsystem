@@ -36,6 +36,7 @@ public class SignUpController {
             userDao.insertUser(user);
             user=userDao.getUser(user).get(0);
             UserInfo userInfo=new UserInfo();
+            userInfo.setProfilephoto("album/timg.jpg");
             userInfo.setID(user.getID());
             userInfo.setUsername(user.getUsername());
             userInfoDao.InsertUserInfo(userInfo);
