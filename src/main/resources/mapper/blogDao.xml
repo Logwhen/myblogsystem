@@ -24,4 +24,5 @@
     <delete id="deleteBlog">
     delete from blog where blogid=#{blogid}
     </delete>
+
 </mapper>

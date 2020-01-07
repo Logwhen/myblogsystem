@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -13,6 +14,7 @@ import java.util.List;
 public interface BlogDao {
     void writeBlog(Blog blog);
     void deleteBlog(Blog blog);
+    @Update("update blog set likes=#{likes},status=#{status} where blogid=#{blogid}")
     void updateBlog(Blog blog);
     List<Blog> getBlog(int blogid);
     //获取当前用户所有博客接口
