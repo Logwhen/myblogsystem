@@ -18,4 +18,5 @@ public class Blog {
     String time;
     int viewtimes;
     int likes;
+    int status;//记录当前用户是否给博客点过赞
 }

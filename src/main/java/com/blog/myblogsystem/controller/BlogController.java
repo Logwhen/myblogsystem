@@ -5,14 +5,11 @@ import com.blog.myblogsystem.dao.CommentDao;
 import com.blog.myblogsystem.dao.FavouratesDao;
 import com.blog.myblogsystem.entity.*;
 import com.blog.myblogsystem.service.SessionService;
-import com.blog.myblogsystem.service.UserService;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.web.servlet.server.Session;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
-import java.sql.PreparedStatement;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -99,6 +96,7 @@ public class BlogController {
         blog.setUserid(Integer.parseInt(id));
         try{
             blogList=blogDao.getUserAllBlogs(blog);
+
         }catch (Exception e)
         {
             e.printStackTrace();
@@ -114,6 +112,16 @@ public class BlogController {
         }
         else
         {
+            for(int i=0;i<blogList.size();i++)
+            {
+                Blog blog1=new Blog();
+                blog1.setUserid(blogList.get(i).getUserid());
+                blog1.setBlogid(blogList.get(i).getBlogid());
+                if(blogDao.CheckLikes(blog1)!=null&&blogDao.CheckLikes(blog1).size()!=0)
+                {
+                    blogList.get(i).setStatus(1);
+                }
+            }
             response.setError("查询成功");
             response.setStatus("200");
             response.setResult(blogList);
@@ -174,6 +182,28 @@ public class BlogController {
     {
         blog.setViewtimes(blog.getViewtimes()+1);
         return String.valueOf(blog.getViewtimes());
+    }
+    @RequestMapping(path = "blog/likes",method = RequestMethod.POST)
+    Response Likes(@RequestBody Blog blog,HttpSession session )
+    {
+        if (sessionService.authority(session).getStatus() != "200") {
+            return sessionService.authority(session);
+        }
+        Response response = new Response();
+        String id = session.getAttribute("id").toString();
+        blog.setLikes(blog.getLikes()+1);
+        blogDao.addLikes(blog);
+        response.setStatus("200");
+        response.setError("点赞成功");
+        return  response;
+    }
+    @RequestMapping(path = "blog/cancelLikes",method = RequestMethod.POST)
+    String CancelLikes(@RequestBody Blog blog)
+    {   int likes=0;
+        likes=blog.getLikes()-1;
+        if(likes<=0) likes=0;
+        blog.setLikes(likes);
+        return String.valueOf(blog.getLikes());
     }
     @RequestMapping(path = "blog/getviewtimes",method = RequestMethod.POST)
     String getViewTimes(@RequestBody Blog blog)

@@ -1,6 +1,7 @@
 package com.blog.myblogsystem.dao;
 
 import com.blog.myblogsystem.entity.Blog;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
@@ -19,5 +20,10 @@ public interface BlogDao {
     List<Blog>searchBlog(String searchString);
     //查看他人所有博客
     List<Blog>viewotherBlogs(int userid);
-
+    @Select("select * from blog where blogid=#{blogid} order by viewtimes")
+    List<Blog>getBlogOrderbyViewTimes(Blog blog);
+    @Insert("insert into Likes(userid,blogid) values(#{userid},#{blogid})")
+    void addLikes(Blog blog);
+    @Select("select * from Likes where userid=#{userid} and blogid=#{blogid}")
+    List<Blog> CheckLikes(Blog blog);
 }
