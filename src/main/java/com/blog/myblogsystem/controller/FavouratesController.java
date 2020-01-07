@@ -1,6 +1,8 @@
 package com.blog.myblogsystem.controller;
 
+import com.blog.myblogsystem.dao.BlogDao;
 import com.blog.myblogsystem.dao.FavouratesDao;
+import com.blog.myblogsystem.entity.Blog;
 import com.blog.myblogsystem.entity.Favourates;
 import com.blog.myblogsystem.entity.Response;
 import com.blog.myblogsystem.service.SessionService;
@@ -21,6 +23,8 @@ public class FavouratesController {
     SessionService sessionService;
     @Autowired
     FavouratesDao favouratesDao;
+    @Autowired
+    BlogDao blogDao;
     @RequestMapping(path = "favourates/insert",method = RequestMethod.POST)
     Response addFavourates(@RequestBody Favourates favourates, HttpSession session)
     {
@@ -64,6 +68,12 @@ public class FavouratesController {
         String userid=session.getAttribute("id").toString();
         favourates.setUserid(userid);
         List<Favourates>favouratesList=favouratesDao.getFavouratesList(favourates);
+        List<Blog> blogList=null;
+        for(int i=0;i<favouratesList.size();i++) {
+            Blog blog=new Blog();
+            blog.setBlogid(Integer.parseInt(favouratesList.get(i).getBlogid()));
+            blogList.add(blogDao.getBlogByBlogid(blog));
+        }
         response.setStatus("200");
         response.setError("获取成功");
         response.setResult(favouratesList);
