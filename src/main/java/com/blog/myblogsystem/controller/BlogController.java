@@ -9,6 +9,7 @@ import com.blog.myblogsystem.service.SessionService;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.PessimisticLockingFailureException;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
@@ -145,6 +146,7 @@ public class BlogController {
 
         System.out.println(blog.getBlogid());
         Response response = new Response();
+
         try{
             Favourates favourates=new Favourates();
             favourates.setBlogid(String.valueOf(blog.getBlogid()));
@@ -189,21 +191,23 @@ public class BlogController {
     {
         Response response=new Response();
         List<Blog> blogList=blogDao.getAllBlogs();
-        List<UserInfo> UserInfoList=new ArrayList<>();
+        List<PersonalPost> personalPosts=new ArrayList<>();
+
         for(int i=0;i<blogList.size();i++)
         {
             int id=blogList.get(i).getUserid();
             UserInfo userInfo=new UserInfo();
             userInfo.setID(id);
             userInfo=userInfoDao.GetUserInfo(userInfo);
-            UserInfoList.add(userInfo);
+            PersonalPost personalPost=new PersonalPost();
+            personalPost.setBlog(blogList.get(i));
+            personalPost.setProfilephoto(userInfo.getProfilephoto());
+            personalPost.setUsername(userInfo.getUsername());
+            personalPosts.add(personalPost);
         }
         response.setStatus("200");
         response.setStatus("访问成功");
-        List<List> lists=new ArrayList<>();
-        lists.add(UserInfoList);
-        lists.add(blogList);
-        response.setResult(lists);
+        response.setResult(personalPosts);
         return response;
     }
     @RequestMapping(path = "blog/viewtimes",method = RequestMethod.POST)
