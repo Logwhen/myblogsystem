@@ -195,6 +195,15 @@ public class BlogController {
 
         for(int i=0;i<blogList.size();i++)
         {
+
+            Blog blog1=new Blog();
+            blog1.setUserid(blogList.get(i).getUserid());
+            blog1.setBlogid(blogList.get(i).getBlogid());
+            if(blogDao.CheckLikes(blog1)!=null&&blogDao.CheckLikes(blog1).size()!=0)
+            {
+                    blogList.get(i).setStatus(1);
+            }
+            else  blogList.get(i).setStatus(0);
             int id=blogList.get(i).getUserid();
             UserInfo userInfo=new UserInfo();
             userInfo.setID(id);
