@@ -16,6 +16,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class BlogController {
@@ -199,8 +200,10 @@ public class BlogController {
         }
         response.setStatus("200");
         response.setStatus("访问成功");
-        response.setResult(blogList);
-        response.setResult(UserInfoList);
+        List<List> lists=new ArrayList<>();
+        lists.add(UserInfoList);
+        lists.add(blogList);
+        response.setResult(lists);
         return response;
     }
     @RequestMapping(path = "blog/viewtimes",method = RequestMethod.POST)
