@@ -25,6 +25,6 @@
         where ID=#{ID}
     </update>
     <insert id="InsertUserInfo">
-        insert into UserInformation(ID,username) values (#{ID},#{username});
+        insert into UserInformation(ID,username,profilephoto,background) values (#{ID},#{username},#{profilephoto},#{background});
     </insert>
 </mapper>
