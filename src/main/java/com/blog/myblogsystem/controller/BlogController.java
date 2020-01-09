@@ -206,17 +206,17 @@ public class BlogController {
         return response;
     }
     @RequestMapping(path = "blog/share",method = RequestMethod.GET)
-    public Response getAllBlogs()
+    public Response getAllBlogs(HttpSession session)
     {
         Response response=new Response();
         List<Blog> blogList=blogDao.getAllBlogs();
         List<PersonalPost> personalPosts=new ArrayList<>();
-
+        int curId=Integer.parseInt(session.getAttribute("id").toString());
         for(int i=0;i<blogList.size();i++)
         {
 
             Blog blog1=new Blog();
-            blog1.setUserid(blogList.get(i).getUserid());
+            blog1.setUserid(curId);
             blog1.setBlogid(blogList.get(i).getBlogid());
             if(blogDao.CheckLikes(blog1)!=null&&blogDao.CheckLikes(blog1).size()!=0)
             {
