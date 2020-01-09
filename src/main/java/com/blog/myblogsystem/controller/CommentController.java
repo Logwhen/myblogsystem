@@ -48,6 +48,7 @@ public class CommentController {
         String curTime=df.format(new Date())+" "+df1.format(new Date());
         comment.setTime(curTime);
         UserInfo userInfo=new UserInfo();
+        userInfo=userInfoDao.GetUserInfo(userInfo);
         userInfo.setID(Integer.parseInt(userid));
         comment.setAvatar(userInfo.getProfilephoto());
         commentDao.insertComment(comment);
