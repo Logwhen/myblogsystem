@@ -13,6 +13,7 @@ import org.springframework.dao.PessimisticLockingFailureException;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import javax.xml.xpath.XPath;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -175,6 +176,24 @@ public class BlogController {
         List<Blog> blogList=null;
         try{
             blogList=blogDao.getUserBlogs(blog);
+        } catch (Exception e) {
+            e.printStackTrace();
+            response.setStatus("500");
+            response.setError("服务器内部错误");
+            return response;
+        }
+        response.setStatus("200");
+        response.setStatus("访问成功");
+        response.setResult(blogList);
+        return response;
+    }
+    @RequestMapping(path = "blog/getById",method = RequestMethod.POST)
+    public Response getBlogByID(@RequestBody Blog blog)
+    {
+        Response response=new Response();
+        List<Blog> blogList=null;
+        try{
+            blogList=blogDao.getBlog(blog.getBlogid());
         } catch (Exception e) {
             e.printStackTrace();
             response.setStatus("500");
