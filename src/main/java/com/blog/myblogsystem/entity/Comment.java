@@ -15,4 +15,5 @@ public class Comment {
     String content;
     String time;
     String username;
+    String avatar;
 }

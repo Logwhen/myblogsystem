@@ -2,9 +2,11 @@ package com.blog.myblogsystem.controller;
 
 import com.blog.myblogsystem.dao.CommentDao;
 import com.blog.myblogsystem.dao.UserDao;
+import com.blog.myblogsystem.dao.UserInfoDao;
 import com.blog.myblogsystem.entity.Comment;
 import com.blog.myblogsystem.entity.Response;
 import com.blog.myblogsystem.entity.User;
+import com.blog.myblogsystem.entity.UserInfo;
 import com.blog.myblogsystem.service.SessionService;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
@@ -25,6 +27,8 @@ public class CommentController {
     UserDao userDao;
     @Autowired
    SessionService sessionService;
+    @Autowired
+    UserInfoDao userInfoDao;
     @RequestMapping(value = "comment/add",method = RequestMethod.POST)
     Response addComment(@RequestBody Comment comment, HttpSession session)
     {
@@ -43,6 +47,9 @@ public class CommentController {
         SimpleDateFormat df1=new SimpleDateFormat("HH:mm:ss");
         String curTime=df.format(new Date())+" "+df1.format(new Date());
         comment.setTime(curTime);
+        UserInfo userInfo=new UserInfo();
+        userInfo.setID(Integer.parseInt(userid));
+        comment.setAvatar(userInfo.getProfilephoto());
         commentDao.insertComment(comment);
         response.setStatus("200");
         response.setError("评论成功");
