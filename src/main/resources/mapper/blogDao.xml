@@ -5,7 +5,7 @@
         select *from blog
         <where>
             <if test="title != null and title !=null">title like concat('%',#{searchString},'%')</if>
-            <if test="Abstract !=null and Abstract !=null">Abstract like concat('%',#{searchString},'%')</if>
+            <if test="Abstract !=null and Abstract !=null">or Abstract like concat('%',#{searchString},'%')</if>
         </where>
     </select>
     <select id="getUserAllBlogs" resultType="com.blog.myblogsystem.entity.Blog">
