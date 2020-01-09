@@ -61,13 +61,13 @@ public class BlogController {
         response.setStatus("200");
         return response;
     }
-    @RequestMapping(path = "blog/search",method = RequestMethod.GET)
-    public Response SearchBlog(@Param("searchString")String searchString)
+    @RequestMapping(path = "blog/search",method = RequestMethod.POST)
+    public Response SearchBlog(@RequestBody Blog blog)
     {
         Response response=new Response();
         List<Blog> blogList=null;
         try{
-            blogList=blogDao.searchBlog(searchString);
+            blogList=blogDao.searchBlog(blog.getTitle());
         }catch (Exception e)
         {
             e.printStackTrace();
