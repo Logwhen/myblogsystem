@@ -16,4 +16,6 @@ public interface UserInfoDao {
    void DeleteUserInfo(UserInfo userInfo);
    @Select("Select * from UserInformation where ID=#{ID}")
    List<UserInfo> SelectByUserId(UserInfo userInfo);
+   @Select("Select * from UserInformation where username like #{username}")
+   List<UserInfo> FindUser(UserInfo userInfo);
 }

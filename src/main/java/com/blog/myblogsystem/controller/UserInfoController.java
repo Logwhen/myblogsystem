@@ -2,6 +2,7 @@ package com.blog.myblogsystem.controller;
 
 import com.blog.myblogsystem.dao.UserInfoDao;
 import com.blog.myblogsystem.entity.Response;
+import com.blog.myblogsystem.entity.User;
 import com.blog.myblogsystem.entity.UserInfo;
 import com.blog.myblogsystem.service.SessionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -87,4 +88,20 @@ public class UserInfoController {
        response.setResult(userInfoList);
        return  response;
    }}
+   @RequestMapping(path = "userInfo/findUser",method = RequestMethod.POST)
+   public Response FindUser(@RequestBody UserInfo userInfo) {
+       Response response = new Response();
+       List<UserInfo> userInfoList = new ArrayList<>();
+       userInfoList = userInfoDao.FindUser(userInfo);
+       if (userInfoList == null || userInfoList.size() == 0) {
+           response.setStatus("404");
+           response.setError("未找到此用户");
+           return response;
+       } else {
+           response.setStatus("200");
+           response.setError("查询成功");
+           response.setResult(userInfoList);
+           return response;
+       }
+   }
 }
