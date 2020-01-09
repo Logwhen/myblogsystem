@@ -36,10 +36,18 @@ public class FavouratesController {
         Response response=new Response();
         String userid=session.getAttribute("id").toString();
         favourates.setUserid(userid);
-        favouratesDao.addfavourates(favourates);
-        response.setError("收藏成功");
-        response.setStatus("200");
-        return response;
+        try {
+            favouratesDao.addfavourates(favourates);
+            response.setError("收藏成功");
+            response.setStatus("200");
+            return response;
+        }
+        catch (Exception e)
+        {
+            response.setStatus("500");
+            response.setError("此文章已在收藏夹中");
+            return  response;
+        }
     }
     @RequestMapping(path = "favourates/delete",method = RequestMethod.DELETE)
     Response deleteFavourates(@RequestBody Favourates favourates,HttpSession session)
