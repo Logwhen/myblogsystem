@@ -36,10 +36,21 @@ public class friendController {
             return sessionService.authority(session);
         }
         Response response=new Response();
-        String userid=session.getAttribute("id").toString();
-        friendList.setUserid(Integer.parseInt(userid));
-        friendDao.subscribe(friendList);
-        return response;
+        try {
+            String userid = session.getAttribute("id").toString();
+            friendList.setUserid(Integer.parseInt(userid));
+            friendDao.subscribe(friendList);
+            response.setStatus("200");
+            response.setError("添加成功");
+            return response;
+        }
+        catch (Exception e)
+        {
+            response.setStatus("500");
+            response.setError("此用户已添加");
+            return  response;
+        }
+
     }
     @RequestMapping(path="friend/delete",method = RequestMethod.DELETE)
     Response Delete(@RequestBody FriendList friendList,HttpSession session)
