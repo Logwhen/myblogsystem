@@ -41,6 +41,7 @@ public class LoginController {
         User user=new User();
         user.setID(Integer.parseInt(session.getAttribute("id").toString()));
         user.setPassword(passwordCheck.getOldPassword());
+        System.out.println(user.getPassword());
         List<User> UserList=userDao.passwordCheck(user);
         if(UserList.size()==0)
         {
