@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -89,11 +90,11 @@ public class PictureController {
         response.setError("删除成功");
         return response;
     }
-    @RequestMapping(path = "picture/view",method = RequestMethod.GET)
+    @RequestMapping(path = "picture/view",method = RequestMethod.POST)
     Response getUserPictures(@RequestBody User user)
     {
         Response response=new Response();
-        List<Picture> pictureList=null;
+        List<Picture> pictureList=new ArrayList<>();
         Picture picture=new Picture();
         picture.setUserid(user.getID());
         pictureList=pictureDao.getuserPictures(picture);
@@ -102,5 +103,4 @@ public class PictureController {
         response.setResult(pictureList);
         return  response;
     }
-
 }
