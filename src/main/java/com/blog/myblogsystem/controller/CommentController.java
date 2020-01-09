@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -84,5 +85,24 @@ public class CommentController {
         response.setStatus("获取成功");
         response.setResult(CommentList);
         return response;
+    }
+    @RequestMapping(path = "comment/status",method = RequestMethod.POST)
+    Response responseComment(@RequestBody Comment comment,HttpSession session)
+    { Response response=new Response();
+        if (sessionService.authority(session).getStatus()!="200")
+        {
+            return sessionService.authority(session);
+        }
+        List<String> responseString=new ArrayList<>();
+        int id=Integer.parseInt(session.getAttribute("id").toString());
+        if(id==comment.getBlogid()) {
+            responseString.add("true");
+        }
+        else  responseString.add("false");
+        response.setStatus("200");
+        response.setError("成功");
+        response.setResult(responseString);
+        return  response;
+
     }
 }
